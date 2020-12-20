@@ -19,10 +19,23 @@ Add this script to your composer.json so your composer container will automatica
 ```
 
 #### #2
+Copy the environment file which suits your project type.
+
+###### Custom
+```
+$ cp .env.generic .env
+```
+
+###### Laravel
+```
+$ cp .env.laravel .env
+```
+
+#### #3
 Run this command to build your container.
 ```
 $ docker-compose up --build
 ```
 
-#### #3
+#### #4
 Happy Coding!

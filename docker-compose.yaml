@@ -36,19 +36,9 @@ services:
             MYSQL_ROOT_PASSWORD: ${DOCKER_DATABASE_ROOT_PASSWORD}
             # PHPSTORM setup for xDebug
             PHP_IDE_CONFIG: serverName=${DOCKER_CONTAINER_NAME}
-            # xDebug configuration
-            XDEBUG_IDEKEY: PHPSTORM
-            XDEBUG_ENABLED: ${XDEBUG_ENABLED}
-            XDEBUG_REMOTE_HOST: ${XDEBUG_CLIENT_HOST}
-            XDEBUG_REMOTE_PORT: ${XDEBUG_CLIENT_PORT}
-            XDEBUG_PROFILER_ENABLE: ${XDEBUG_ENABLED}
-            XDEBUG_REMOTE_AUTOSTART: ${XDEBUG_REMOTE_AUTOSTART}
-            XDEBUG_MAXNESTING_LEVEL: ${XDEBUG_MAXNESTING_LEVEL}
-            XDEBUG_REMOTE_CONNECT_BACK: ${XDEBUG_REMOTE_CONNECT_BACK}
         volumes:
             - .:/var/www/html/
-        ports:
-            - ${DOCKER_PHP_PORT}:9000
+            - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
         networks:
             - backend
 
