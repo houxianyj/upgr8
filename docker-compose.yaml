@@ -25,7 +25,7 @@ services:
         environment:
             # generic
             TZ: ${DOCKER_CONTAINER_TIMEZONE}
-            # php runtime
+            # php runtime   https://www.php.net/manual/zh/ini.list.php
             PHP_DISPLAY_ERRORS: ${PHP_DISPLAY_ERRORS}
             PHP_MEMORY_LIMIT: ${PHP_MEMORY_LIMIT}
             PHP_MAX_EXECUTION_TIME: ${PHP_MAX_EXECUTION_TIME}
