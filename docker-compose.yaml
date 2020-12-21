@@ -5,6 +5,10 @@ version: '3.8'
 networks:
     backend:
         driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.28.0.0/24
 
 # Volumes used for this environment.
 volumes:
@@ -40,7 +44,9 @@ services:
             - .:/var/www/html/
             - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
         networks:
-            - backend
+            backend:
+                ipv4_address: "172.28.0.10"
+        mac_address: "02:42:ac:1a:00:01"
 
     # This references to the Dockerfile in "./docker/composer".
     composer:
@@ -81,7 +87,9 @@ services:
         depends_on:
             - php
         networks:
-            - backend
+            backend:
+                ipv4_address: "172.28.0.11"
+        mac_address: "02:42:ac:1a:00:02"
 
     # This references to the Dockerfile in "./docker/database".
     database:
@@ -106,17 +114,5 @@ services:
         networks:
             - backend
 
-    # This references to the Dockerfile in "./docker/redis".
-    redis:
-        build:
-            context: ./docker/redis
-            args:
-                version: ${DOCKER_REDIS_VERSION}
-        container_name: ${DOCKER_CONTAINER_NAME}.redis
-        hostname: backend.${DOCKER_CONTAINER_NAME}.redis
-        ports:
-            - ${DOCKER_REDIS_PORT}:6379
-        depends_on:
-            - php
-        networks:
-            - backend
+
+#docker run --rm -it -w /var/www/html --volumes-from upgr8.php upgr8_composer composer create-project laravel/laravel
