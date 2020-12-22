@@ -92,27 +92,42 @@ services:
         mac_address: "02:42:ac:1a:00:02"
 
     # This references to the Dockerfile in "./docker/database".
-    database:
-        build:
-            context: ./docker/database
-            args:
-                version: ${DOCKER_DATABASE_VERSION}
-        container_name: ${DOCKER_CONTAINER_NAME}.database
-        hostname: backend.${DOCKER_CONTAINER_NAME}.database
-        environment:
-            TZ: ${DOCKER_CONTAINER_TIMEZONE}
-            MYSQL_DATABASE: ${DOCKER_DATABASE_DATABASE}
-            MYSQL_USER: ${DOCKER_DATABASE_USERNAME}
-            MYSQL_PASSWORD: ${DOCKER_DATABASE_PASSWORD}
-            MYSQL_ROOT_PASSWORD: ${DOCKER_DATABASE_ROOT_PASSWORD}
-        volumes:
-            - database:/var/lib/mysq
-        ports:
-            - ${DOCKER_DATABASE_PORT}:3306
-        depends_on:
-            - php
-        networks:
-            - backend
+#    database:
+#        build:
+#            context: ./docker/database
+#            args:
+#                version: ${DOCKER_DATABASE_VERSION}
+#        container_name: ${DOCKER_CONTAINER_NAME}.database
+#        hostname: backend.${DOCKER_CONTAINER_NAME}.database
+#        environment:
+#            TZ: ${DOCKER_CONTAINER_TIMEZONE}
+#            MYSQL_DATABASE: ${DOCKER_DATABASE_DATABASE}
+#            MYSQL_USER: ${DOCKER_DATABASE_USERNAME}
+#            MYSQL_PASSWORD: ${DOCKER_DATABASE_PASSWORD}
+#            MYSQL_ROOT_PASSWORD: ${DOCKER_DATABASE_ROOT_PASSWORD}
+#        volumes:
+#            - database:/var/lib/mysq
+#        ports:
+#            - ${DOCKER_DATABASE_PORT}:3306
+#        depends_on:
+#            - php
+#        networks:
+#            - backend
+#
+#    # This references to the Dockerfile in "./docker/redis".
+#    redis:
+#        build:
+#            context: ./docker/redis
+#            args:
+#                version: ${DOCKER_REDIS_VERSION}
+#        container_name: ${DOCKER_CONTAINER_NAME}.redis
+#        hostname: backend.${DOCKER_CONTAINER_NAME}.redis
+#        ports:
+#            - ${DOCKER_REDIS_PORT}:6379
+#        depends_on:
+#            - php
+#        networks:
+#            - backend
 
 
 #docker run --rm -it -w /var/www/html --volumes-from upgr8.php upgr8_composer composer create-project laravel/laravel
