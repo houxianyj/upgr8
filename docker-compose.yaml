@@ -42,28 +42,28 @@ services:
             PHP_IDE_CONFIG: serverName=${DOCKER_CONTAINER_NAME}
         volumes:
             - .:/var/www/html/
-            - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+            - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
         networks:
             backend:
                 ipv4_address: "172.28.0.10"
         mac_address: "02:42:ac:1a:00:01"
 
     # This references to the Dockerfile in "./docker/composer".
-    composer:
-        build:
-            context: ./docker/composer
-            args:
-                version: ${DOCKER_COMPOSER_VERSION}
-        working_dir: /var/www/html/
-        container_name: ${DOCKER_CONTAINER_NAME}.composer
-        hostname: backend.${DOCKER_CONTAINER_NAME}.composer
-        command: ['docker-setup']
-        volumes_from:
-            - php
-        depends_on:
-            - php
-        networks:
-            - backend
+#    composer:
+#        build:
+#            context: ./docker/composer
+#            args:
+#                version: ${DOCKER_COMPOSER_VERSION}
+#        working_dir: /var/www/html/
+#        container_name: ${DOCKER_CONTAINER_NAME}.composer
+#        hostname: backend.${DOCKER_CONTAINER_NAME}.composer
+#        command: ['docker-setup']
+#        volumes_from:
+#            - php
+#        depends_on:
+#            - php
+#        networks:
+#            - backend
 
     # This references to the Dockerfile in "./docker/webserver".
     webserver:
