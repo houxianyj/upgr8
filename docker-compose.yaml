@@ -43,6 +43,9 @@ services:
         volumes:
             - .:/var/www/html/
             - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+        ports:
+          - 9000:9000
+          - 9003:9003
         networks:
             backend:
                 ipv4_address: "172.28.0.10"
